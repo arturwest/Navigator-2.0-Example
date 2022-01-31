@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../auth_widget.dart';
 
-class LoginPage extends Page<AuthWidget> {
-  const LoginPage() : super(name: "auth", key: const ValueKey<String>("auth"));
+class AuthPage extends Page<AuthWidget> {
+  const AuthPage() : super(name: "auth", key: const ValueKey<String>("auth"));
 
   @override
   Route<AuthWidget> createRoute(BuildContext context) {

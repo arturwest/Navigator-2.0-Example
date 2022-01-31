@@ -1,6 +1,6 @@
 import 'package:declarative_navigation_example/actions/home_action.dart';
+import 'package:declarative_navigation_example/router/pages/auth_page.dart';
 import 'package:declarative_navigation_example/router/pages/home_page.dart';
-import 'package:declarative_navigation_example/router/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
@@ -29,7 +29,11 @@ class AppRouterDelegate extends RouterDelegate<AppConfiguration>
   void _subscribeOnAppUpdates() {
     prefsDataSource.getLoggedInStateStream().listen((isLoggedIn) {
       _isLoggedIn = isLoggedIn;
-      _myConfiguration = AppConfiguration.home(0);
+      if (_isLoggedIn) {
+        _myConfiguration = AppConfiguration.home(0);
+      } else {
+        _myConfiguration = AppConfiguration.login();
+      }
       notifyListeners();
     });
   }
@@ -39,7 +43,7 @@ class AppRouterDelegate extends RouterDelegate<AppConfiguration>
     List<Page<dynamic>> stack = List.empty(growable: true);
     var configuration = _myConfiguration;
     if (configuration is LoginNavState) {
-      stack.add(const LoginPage());
+      stack.add(const AuthPage());
     } else if (configuration is HomeNavState) {
       stack.add(HomePage(configuration.selectedIndex, _processHomeClick));
     }

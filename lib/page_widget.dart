@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class PageWidget extends StatelessWidget {
-  final int page;
+  final int pageIndex;
 
-  const PageWidget(this.page, {Key? key}) : super(key: key);
+  const PageWidget(this.pageIndex, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("PAGE $page"),
+        child: Text("PAGE ${pageIndex+1}"),
       ),
     );
   }
