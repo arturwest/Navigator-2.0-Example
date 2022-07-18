@@ -1,6 +1,7 @@
 import 'package:declarative_navigation_example/actions/home_action.dart';
 import 'package:declarative_navigation_example/router/pages/auth_page.dart';
 import 'package:declarative_navigation_example/router/pages/home_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
@@ -56,7 +57,7 @@ class AppRouterDelegate extends RouterDelegate<AppConfiguration>
   }
 
   @override
-  Future<void> setNewRoutePath(AppConfiguration configuration) async {
+  Future<void> setNewRoutePath(AppConfiguration configuration) {
     if (configuration is! LoginNavState && !_isLoggedIn) {
       //Here you can write your own logic to save user intent and open it after login
       _myConfiguration = AppConfiguration.login();
@@ -65,6 +66,7 @@ class AppRouterDelegate extends RouterDelegate<AppConfiguration>
     } else {
       _myConfiguration = configuration;
     }
+    return SynchronousFuture<void>(null);
   }
 
   void _processHomeClick(HomeAction action) {

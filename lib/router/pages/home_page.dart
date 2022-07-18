@@ -6,18 +6,21 @@ import '../../home_widget.dart';
 
 class HomePage extends Page<HomeWidget> {
   final Function(HomeAction) _onHomeAction;
-  final int _selectedIndex;
   final bool forceUpdate;
 
-  HomePage(this._selectedIndex, this._onHomeAction, {this.forceUpdate = false})
-      : super(name: "home", key: ValueKey<String>("home:$_selectedIndex"));
+  const HomePage(int selectedIndex, this._onHomeAction,
+      {this.forceUpdate = false})
+      : super(
+            name: "home",
+            arguments: selectedIndex,
+            key: const ValueKey<String>("home"));
 
   @override
   Route<HomeWidget> createRoute(BuildContext context) {
     return NoAnimationMaterialPageRoute(
         settings: this,
         builder: (BuildContext context) {
-          return HomeWidget(_selectedIndex, _onHomeAction);
+          return HomeWidget(_onHomeAction);
         });
   }
 

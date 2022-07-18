@@ -30,7 +30,7 @@ class AppConfiguration {
   static Uri toUri(AppConfiguration configuration) {
     String path = "";
     if (configuration is LoginNavState) {
-      path = AppConfiguration.loginPath;
+      path = loginPath;
     } else if (configuration is HomeNavState) {
       switch (configuration.selectedIndex) {
         case 0:

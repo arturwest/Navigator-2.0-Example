@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'actions/home_action.dart';
 
 class HomeWidget extends StatefulWidget {
-  final int selectedIndex;
   final Function(HomeAction) onHomeAction;
 
-  const HomeWidget(this.selectedIndex, this.onHomeAction, {Key? key})
+  const HomeWidget(this.onHomeAction, {Key? key})
       : super(key: key);
 
   @override
@@ -17,8 +16,12 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
+  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    _selectedIndex = ModalRoute.of(context)!.settings.arguments as int;
+
     return Scaffold(
         body: Row(
       children: [
@@ -31,13 +34,13 @@ class _HomeWidgetState extends State<HomeWidget> {
             NavigationRailDestination(
                 icon: Icon(Icons.emoji_symbols), label: Text("PAGE 2"))
           ],
-          selectedIndex: widget.selectedIndex,
+          selectedIndex: _selectedIndex,
           onDestinationSelected: (value) {
             widget.onHomeAction(HomeAction.sideMenuClick(value));
           },
         ),
         Container(width: 2),
-        Expanded(child: PageWidget(widget.selectedIndex))
+        Expanded(child: PageWidget(_selectedIndex))
       ],
     ));
   }
